@@ -1,40 +1,33 @@
 <!DOCTYPE html>
 <html>
-<body style="font-family: Noto Sans, system-ui, sans-serif; height: 100vh; background-image: url('bg.jpg'); background-size: cover; background-repeat: no-repeat; margin: 0px; position: relative;">
+<head>
+  <meta charset="utf-8">
+  <title>MariOS</title>
+  <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+<body>
 
-  <div style="border: solid; padding: 16px; border-radius: 16px; width: fit-content; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #fff;">
-    <img src="mario.jpg" style="width: 64px; height: 64px; border-radius: 32px; object-fit: cover;" />
-    <h1 style="margin: 4px;">~ MariOS ~</h1>
-    <p>Hi! It's-a Me, Mario!</p>
-    <dfn>MariOS</dfn> is an
-    <abbr title="Operating System">OS</abbr> inspired by
-    <br />
-    Mario
-    answering <code>"who is Mario?"</code>
+  <div class="window" id="mydiv">
+    <div class="windowheader" id="mydivheader">
+      <span class="headertext">Welcome!</span>
+      <div class="closebutton" id="welcomeclose" title="Close Window"></div>
+    </div>
+
+    <div class="windowcontent">
+      <img src="mario.jpg" alt="Mario" />
+      <h1>~ MariOS ~</h1>
+      <p>
+        <dfn>MariOS</dfn> is an <abbr title="Operating System">OS</abbr> inspired by Mario <br />
+        Hi! <code>It's-a me, Mario!</code>
+      </p>
+    </div>
   </div>
 
-  <div style="background-color: rgba(0, 0, 0, 0.25); color: #fff; display: flex; justify-content: space-between; position: absolute; bottom: 0; left: 0; width: 100%;">
-    <p style="margin-left: 16px;">
-      MariOS
-    </p>
-    <p id="timeElement" style="margin-right: 16px;">
-      6/21/2023 3:41 PM
-    </p>
+  <div class="taskbar">
+    <p id="welcomeopen">MariOS</p>
+    <p id="timeElement">6/21/2023 3:41 PM</p>
   </div>
 
-  <script> 
-  function updateTime(){
-    var currentTime = new Date().toLocaleString();
-    var timeText = document.querySelector("#timeElement");
-    if(timeText) { 
-      timeText.innerHTML = currentTime;
-    }
-  }
-
-  updateTime(); 
-  setInterval(updateTime, 1000);
-  </script>
-
+  <script src="script.js"></script>
 </body>
 </html>
-
