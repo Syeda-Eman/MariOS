@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>MariOS</title>
+  <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+<body>
+
+  <div class="window" id="mydiv">
+    <div class="windowheader" id="mydivheader">
+      <span class="headertext">Welcome!</span>
+      <div class="closebutton" id="welcomeclose" title="Close Window"></div>
+    </div>
+
+    <div class="windowcontent">
+      <img src="mario.jpg" alt="Mario" />
+      <h1>~ MariOS ~</h1>
+      <p>
+        <dfn>MariOS</dfn> is an <abbr title="Operating System">OS</abbr> inspired by Mario <br />
+        Hi! <code>It's-a me, Mario!</code>
+      </p>
+    </div>
+  </div>
+
+  <div class="taskbar">
+    <p id="welcomeopen">MariOS</p>
+    <p id="timeElement">6/21/2023 3:41 PM</p>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
