@@ -7,25 +7,44 @@
 </head>
 <body>
 
+  <div class="taskbar" id="top">
+    <p id="welcomeopen">MariOS</p>
+    <p id="timeElement">6/21/2023 3:41 PM</p>
+  </div>
+
+  <div id="desktopApps">
+    <div class="app-icon" id="journalIcon">
+      <img src="journal.png" alt="Journal Icon" />
+      <p>My Journal</p>
+    </div>
+  </div>
+
   <div class="window" id="mydiv">
     <div class="windowheader" id="mydivheader">
       <span class="headertext">Welcome!</span>
       <div class="closebutton" id="welcomeclose" title="Close Window"></div>
     </div>
-
     <div class="windowcontent">
       <img src="mario.jpg" alt="Mario" />
       <h1>~ MariOS ~</h1>
       <p>
-        <dfn>MariOS</dfn> is an <abbr title="Operating System">OS</abbr> inspired by Mario <br />
+        <dfn>MariOS</dfn> is an <abbr title="Operating System">OS</abbr> inspired by Mario<br />
         Hi! <code>It's-a me, Mario!</code>
       </p>
     </div>
   </div>
 
-  <div class="taskbar">
-    <p id="welcomeopen">MariOS</p>
-    <p id="timeElement">6/21/2023 3:41 PM</p>
+  <div class="window" id="journalApp" style="display: none;">
+    <div class="windowheader" id="journalAppheader">
+      <span class="headertext">MariOS Journal</span>
+      <div class="closebutton" id="journalclose" title="Close Window"></div>
+    </div>
+    <div class="app-container">
+      <div id="sidebar"></div>
+      <div id="notebookContent" class="content-viewer">
+        <p>Select a journal log from the panel to read.</p>
+      </div>
+    </div>
   </div>
 
   <script src="script.js"></script>
