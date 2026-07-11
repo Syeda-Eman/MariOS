@@ -14,8 +14,13 @@
 
   <div id="desktopApps">
     <div class="app-icon" id="journalIcon">
-      <img src="journal.png" alt="Journal Icon" />
+      <img src="journal.jpg" alt="Journal Icon" />
       <p>My Journal</p>
+    </div>
+
+    <div class="app-icon" id="mapIcon">
+      <img src="castle.png" alt="Map Icon" />
+      <p>World Map</p>
     </div>
   </div>
 
@@ -47,6 +52,23 @@
     </div>
   </div>
 
+  <div class="window" id="mapApp" style="display: none;">
+    <div class="windowheader" id="mapAppheader">
+      <span class="headertext">Mushroom Kingdom Explorer</span>
+      <div class="closebutton" id="mapclose" title="Close Window"></div>
+    </div>
+    <div class="map-layout">
+      <div class="map-grid">
+        <button class="map-pin" onclick="showLocation('castle')">Peach's Castle</button>
+        <button class="map-pin" onclick="showLocation('lava')">Bowser's Keep</button>
+        <button class="map-pin" onclick="showLocation('island')">Yoshi's Island</button>
+      </div>
+      <div id="locationDetails"
+        <h3>World Selector</h3>
+        <p>Click a regional map landmark to inspect zone intelligence.</p>
+      </div>
+    </div>  
+  </div>
   <script src="script.js"></script>
 </body>
 </html>
