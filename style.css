@@ -15,42 +15,54 @@ body {
 }
 
 #desktopApps {
-  padding-top: 65px; 
-  padding-left: 20px;
+  position: absolute;
+  top: 70px; 
+  left: 20px;   
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  align-items: center;   
+  gap: 20px;         
+  width: 90px;       
+  z-index: 5;
 }
 
-
+/* App Icon Styling */
 .app-icon {
   text-align: center;
-  width: 80px;
-  padding: 8px;
   cursor: pointer;
   border-radius: 12px;
-  transition: background 0.2s;
+  padding: 8px;
+  width: 100%;  
   user-select: none;
+  transition: background-color 0.2s;
 }
+
+.app-icon:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
 .app-icon img {
   width: 60px;
   height: 60px;
   border-radius: 14px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  display: block;
+  margin: 0 auto; 
 }
+
 .app-icon p {
   margin: 6px 0 0 0;
   color: #fff;
-  font-size: 12px;
-  text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
+  font-size: 11px;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.9);
   font-weight: 500;
+  white-space: nowrap;
 }
 
 .app-icon.selected {
   background-color: rgba(255, 255, 255, 0.25);
   outline: 2px solid #fff;
 }
-
 
 .window {
   position: absolute; 
@@ -71,6 +83,11 @@ body {
 #journalApp {
   width: 580px;
   height: 440px;
+}
+
+#mapApp {
+  width: 620px;
+  height: 460px;
 }
 
 .windowheader {
@@ -117,7 +134,7 @@ body {
 }
 
 
-.app-container {
+.app-container, .map-layout {
   display: flex;
   flex: 1;
   background-color: #fff;
@@ -147,42 +164,66 @@ body {
 .sidebar-item:hover {
   background: #ffe5e5;
 }
-.sidebar-item p {
-  margin: 0;
-}
-
 .content-viewer {
-  flex: 1;
+  flex:1;
   padding: 16px;
   overflow-y: auto;
   font-family: 'Courier New', Courier, monospace;
 }
-
-
-.taskbar {
-  background-color: rgba(0, 0, 0, 0.75); 
+.map-grid{
+  width: 50%;
+  background: #aad7ff;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+  border-right: 1px solid #ccc;
+}
+.map-pin{
+  width: 80%;
+  padding: 12px;
+  background-color: #fff;
+  border: 2px solid #e60012;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.1s, background-color 0.2s;
+}
+.map-pin:hover{
+  transform: scale(1.05);
+  background-color: #fff0f0;
+}
+#locationDetails {
+  width: 50%;
+  padding: 20px;
+  overflow-y: auto;
+  background-color: #fffcf7;
+}
+.taskbar{
+  background-color: rgba(0, 0, 0, 0.75);
   backdrop-filter: blur(4px);
-  color: #fff; 
-  display: flex; 
-  justify-content: space-between; 
-  align-items: center; 
-  position: absolute; 
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
   top: 0; 
   left: 0; 
-  width: 100%;
-  height: 45px;
+  width: 100%; 
+  height: 45px; 
   padding: 0 16px;
 }
-
-#welcomeopen {
-  cursor: pointer;
-  font-weight: bold;
-  padding: 4px 8px;
+#welcomeopen{
+  cursor: pointer; 
+  font-weight: bold; 
+  padding: 4px 8px; 
   border-radius: 4px;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.1); 
   margin: 0;
 }
-#welcomeopen:hover {
+welcomeopen:hover {
   background-color: rgba(255, 255, 255, 0.25);
 }
 #timeElement {
