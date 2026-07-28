@@ -1,203 +1,200 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>MariOS</title>
-    <link rel="stylesheet" type="text/css" href="style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MariOS — A Mushroom Kingdom Desktop</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+<body>
 
-<body style="margin: 0; font-family: sans-serif; overflow: hidden; min-height: 100vh;">
-
-    <div id="wallpaper" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -100; overflow: hidden;">
-        <img id="bgImage" src="banner4 - Copy (2).jpg" style="width: 100%; height: 100%; object-fit: cover; display: block;">
-        <video id="bgVideo" autoplay loop muted playsinline style="display: none; width: 100%; height: 100%; object-fit: cover;"></video>
-    </div>
-   
-    <div id="top" style="display: flex; justify-content: space-between; align-items: center; background-color: rgba(0, 0, 0, 0.25); color: #fff; backdrop-filter: blur(10px); padding: 0 16px; height: 45px; position: absolute; width: 100%; top: 0; left: 0; box-sizing: border-box;">
-        <div id="welcomeopen" style="background: rgba(255,255,255,0.2); padding: 4px 12px; border-radius: 20px; font-size: 12px; cursor: pointer; font-weight: bold;">Active</div>
-        <p style="margin: 0; font-weight: bold; font-size: 16px;">MariOS</p>
-        <p id="timeElement" style="margin: 0; font-size: 14px;">7/9/2026, 6:29:05 PM</p>
+    <div id="desktop-wallpaper">
+        <img id="active-bg" src="banner4 - Copy (2).jpg" alt="Mushroom Kingdom Environment">
     </div>
 
-    <div id="desktopApps" style="padding-top: 64px; padding-left: 24px; display: flex; gap: 20px; position: absolute; z-index: 1;">
-       
-        <div id="journalIcon" style="text-align: center; cursor: pointer; width: 80px;">
-            <div style="background-color: rgba(255,255,255,0.2); backdrop-filter: blur(5px); padding: 8px; border-radius: 16px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); display: inline-block;">
-                <img src="journal.jpg" alt="Journal" style="width: 48px; height: 48px; object-fit: cover; border-radius: 8px; display: block;">
-            </div>
-            <p style="margin: 6px 0 0 0; color: #fff; font-size: 12px; font-weight: bold; text-shadow: 1px 1px 4px rgba(0,0,0,0.8);">Journal</p>
+    <header id="os-top-bar">
+        <div class="top-bar-left">
+            <span class="brand-badge">M</span>
+            <span class="menu-trigger bold">MariOS</span>
+            <span class="menu-trigger">Desktop</span>
+            <span class="menu-trigger">Apps</span>
+            <span class="menu-trigger">Window</span>
         </div>
-
-        <div id="themeIcon" style="text-align: center; cursor: pointer; width: 80px;">
-            <div style="background-color: rgba(255,255,255,0.2); backdrop-filter: blur(5px); padding: 8px; border-radius: 16px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); display: inline-block;">
-                <span style="font-size: 32px; display: block; line-height: 48px; width: 48px; height: 48px; text-align: center;">🎨</span>
-            </div>
-            <p style="margin: 6px 0 0 0; color: #fff; font-size: 12px; font-weight: bold; text-shadow: 1px 1px 4px rgba(0,0,0,0.8);">Themes</p>
+        <div class="top-bar-right">
+            <span id="os-live-clock" class="status-time">Mon, Jul 20 7:29 PM</span>
         </div>
+    </header>
 
-    </div>
-
-    <div class="window" id="welcome" style="position: absolute; top: calc(50% - 250px); left: calc(50% - 225px); width: 450px; min-height: 500px; background: rgba(36, 23, 20, 0.75); border: 1px solid rgba(255, 255, 255, 0.12); backdrop-filter: blur(25px); border-radius: 24px; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6); display: flex; flex-direction: column; overflow: hidden; color: #fff; transition: transform 0.25s ease, opacity 0.25s ease;">
-        
-        <div class="windowheader" id="welcomeheader" style="display: flex; align-items: center; padding: 14px 16px; border-bottom: 1px solid rgba(255, 255, 255, 0.08); cursor: grab; background: rgba(0, 0, 0, 0.15); justify-content: space-between;">
-            <div style="display: flex; gap: 8px; align-items: center; width: 60px; z-index: 10;">
-                <div class="control-dot" id="welcomeclose" title="Close" style="width: 12px; height: 12px; background-color: #ff5f56; border-radius: 50%; cursor: pointer; border: 1px solid rgba(0, 0, 0, 0.12); transition: filter 0.1s;"></div>
-                <div class="control-dot" id="welcomeminimize" title="Minimize" style="width: 12px; height: 12px; background-color: #ffbd2e; border-radius: 50%; cursor: pointer; border: 1px solid rgba(0, 0, 0, 0.12); transition: filter 0.1s;"></div>
-                <div class="control-dot" id="welcomemaximize" title="Maximize" style="width: 12px; height: 12px; background-color: #27c93f; border-radius: 50%; cursor: pointer; border: 1px solid rgba(0, 0, 0, 0.12); transition: filter 0.1s;"></div>
+    <main id="desktop-apps-container">
+        <div class="desktop-shortcut" onclick="toggleWindow('journal-window', true)">
+            <div class="shortcut-icon emerald-green-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
             </div>
+            <span class="shortcut-label">Journal</span>
+        </div>
+    </main>
+
+    <aside id="desktop-widgets-sidebar">
+        <div class="system-widget glass-card">
+            <div class="widget-header">
+                <span class="widget-meta-title">MUSHROOM STANDARD</span>
+                <span class="widget-meta-date" id="widget-date-tag">JUL 20</span>
+            </div>
+            <div class="clock-display-engine">
+                <h2 class="clock-time-string" id="widget-time-string">07:29</h2>
+                <div class="clock-meridiem-stack">
+                    <span class="meridiem-indicator">PM</span>
+                    <span class="day-indicator" id="widget-day-string">Monday</span>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <section class="window glass-panel-window active-window" id="about-window">
+        <div class="windowheader">
+            <div class="window-control-dots">
+                <span class="control-dot close-dot" onclick="toggleWindow('about-window', false)"></span>
+                <span class="control-dot minimize-dot"></span>
+                <span class="control-dot maximize-dot"></span>
+            </div>
+            <div class="window-title-string">⭐ About MariOS</div>
+            <div class="window-header-balancer"></div>
+        </div>
+        <div class="window-body-wrapper">
+            <div class="app-hero-header">
+                <img src="mario.jpg" alt="Mario Art">
+                <div class="app-hero-card-tint">
+                    <p class="app-welcome-tag">WELCOME</p>
+                    <h1 class="app-main-title">MariOS 2.0</h1>
+                </div>
+            </div>
+            <p class="app-text-paragraph">
+                A polished desktop environment inspired by the Mushroom Kingdom. Log your adventures, personalize your background, and customize your desktop experience.
+            </p>
+            <div class="app-action-grid">
+                <button class="grid-action-button" onclick="toggleWindow('journal-window', true)">
+                    <span class="action-icon-pill">📖</span>
+                    <div class="action-meta-wrapper">
+                        <span class="action-heading">Open Journal</span>
+                        <span class="action-subheading">Field notes & logs</span>
+                    </div>
+                </button>
+                <button class="grid-action-button" onclick="toggleWindow('settings-window', true)">
+                    <span class="action-icon-pill">⚙️</span>
+                    <div class="action-meta-wrapper">
+                        <span class="action-heading">Settings</span>
+                        <span class="action-subheading">Themes & wallpapers</span>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section class="window glass-panel-window" id="journal-window" style="display: none;">
+        <div class="windowheader">
+            <div class="window-control-dots">
+                <span class="control-dot close-dot" onclick="toggleWindow('journal-window', false)"></span>
+                <span class="control-dot minimize-dot"></span>
+                <span class="control-dot maximize-dot"></span>
+            </div>
+            <div class="window-title-string">📖 Field Journal</div>
+            <div class="window-header-balancer"></div>
+        </div>
+        <div class="window-body-wrapper scrollable-body">
+            <div class="journal-editor-box">
+                <input type="text" id="journal-title-input" class="input-field-dark" placeholder="Entry Title..." style="width:100%; margin-bottom:10px;">
+                <textarea id="journal-content-input" class="input-field-dark" style="width:100%; height:110px; padding:12px; font-family:inherit; resize:none; margin-bottom:10px;" placeholder="Write field notes..."></textarea>
+                <div style="display:flex; gap:10px; justify-content:flex-end;">
+                    <button id="journal-cancel-btn" class="secondary-btn" style="display:none;" onclick="cancelJournalEdit()">Cancel</button>
+                    <button id="journal-save-btn" class="primary-btn" onclick="saveJournalEntry()">Save Entry</button>
+                </div>
+            </div>
+
+            <h3 class="block-label" style="margin-top:20px;">SAVED ENTRIES</h3>
+            <div id="journal-entries-list" class="journal-entries-list">
+                </div>
+        </div>
+    </section>
+
+    <section class="window glass-panel-window" id="settings-window" style="display: none;">
+        <div class="windowheader">
+            <div class="window-control-dots">
+                <span class="control-dot close-dot" onclick="toggleWindow('settings-window', false)"></span>
+                <span class="control-dot minimize-dot"></span>
+                <span class="control-dot maximize-dot"></span>
+            </div>
+            <div class="window-title-string">⚙️ Settings</div>
+            <div class="window-header-balancer"></div>
+        </div>
+        <div class="window-body-wrapper scrollable-body">
+            <h2 class="settings-title">Settings</h2>
+            <p class="settings-subtitle">Tune your MariOS to taste.</p>
+
+            <div class="settings-block">
+                <h3 class="block-label">ACCENT COLOR</h3>
+                <div class="accent-color-row">
+                    <span class="color-swatch-circle picked" style="background-color: #ff3b30;" onclick="setAccentColor('#ff3b30', this)"></span>
+                    <span class="color-swatch-circle" style="background-color: #ffcc00;" onclick="setAccentColor('#ffcc00', this)"></span>
+                    <span class="color-swatch-circle" style="background-color: #34c759;" onclick="setAccentColor('#34c759', this)"></span>
+                    <span class="color-swatch-circle" style="background-color: #007aff;" onclick="setAccentColor('#007aff', this)"></span>
+                    <span class="color-swatch-circle" style="background-color: #af52de;" onclick="setAccentColor('#af52de', this)"></span>
+                </div>
+            </div>
+
+            <div class="settings-block">
+                <h3 class="block-label">PRESET WALLPAPERS</h3>
+                <div class="wallpaper-selection-grid">
+                    <div class="thumbnail-item active" onclick="updateWallpaper('banner4 - Copy (2).jpg')"><img src="banner4 - Copy (2).jpg"></div>
+                    <div class="thumbnail-item" onclick="updateWallpaper('banner1.jpg')"><img src="banner1.jpg"></div>
+                    <div class="thumbnail-item" onclick="updateWallpaper('banner2.jpg')"><img src="banner2.jpg"></div>
+                    <div class="thumbnail-item" onclick="updateWallpaper('banner3.jpg')"><img src="banner3.jpg"></div>
+                    <div class="thumbnail-item" onclick="updateWallpaper('mario.jpg')"><img src="mario.jpg"></div>
+                    <div class="thumbnail-item" onclick="updateWallpaper('image_01bdc1.jpg')"><img src="image_01bdc1.jpg"></div>
+                </div>
+            </div>
+
+            <div class="settings-block">
+                <h3 class="block-label">CUSTOM WALLPAPER URL</h3>
+                <p class="block-description">Paste an image link below to update your background.</p>
+                <div class="custom-url-flex-row">
+                    <input type="text" id="custom-wallpaper-url" class="input-field-dark" placeholder="https://.../image.jpg">
+                    <button class="primary-btn" onclick="applyCustomWallpaperUrl()">Apply</button>
+                </div>
+                <div class="build-info-card">
+                    <h4>MariOS 2.0 (Mushroom Kingdom)</h4>
+                    <p>Build 07.20.2026 · Made with love for pipes, plumbers, and pixels.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <nav id="system-dock-dockbar">
+        <div class="dock-inner-frame">
             
-            <div style="display: flex; align-items: center; gap: 6px; position: absolute; left: 50%; transform: translateX(-50%); pointer-events: none;">
-                <span style="font-size: 14px; color: #ffa502;">⭐</span>
-                <p class="headertext" style="margin: 0; font-size: 13px; font-weight: 600; color: rgba(255, 255, 255, 0.9); letter-spacing: 0.3px;">About MariOS</p>
+            <div class="dock-app-unit process-active" id="dock-about-window" onclick="toggleWindow('about-window', true)">
+                <div class="dock-app-icon gold-orange-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                </div>
             </div>
-            <div style="width: 60px;"></div>
+
+            <div class="dock-app-unit" id="dock-journal-window" onclick="toggleWindow('journal-window', true)">
+                <div class="dock-app-icon emerald-green-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                </div>
+            </div>
+
+            <div class="dock-divider-line"></div>
+
+            <div class="dock-app-unit" id="dock-settings-window" onclick="toggleWindow('settings-window', true)">
+                <div class="dock-app-icon crimson-red-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                </div>
+            </div>
+
         </div>
-
-        <div style="padding: 16px; display: flex; flex-direction: column; gap: 14px; box-sizing: border-box;">
-            <div style="position: relative; height: 160px; border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; padding: 16px; box-sizing: border-box; box-shadow: inset 0 -40px 60px rgba(0,0,0,0.8);">
-                <img src="mario.jpg" alt="Mario Welcome" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1;" />
-                <p style="margin: 0; font-size: 10px; font-weight: bold; color: #ffca28; letter-spacing: 1px; text-transform: uppercase;">WELCOME</p>
-                <h1 style="margin: 2px 0 0 0; font-size: 24px; font-weight: 800; color: #ffca28; text-shadow: 0 2px 4px rgba(0,0,0,0.6);">MariOS 2.0</h1>
-            </div>
-
-            <div style="padding: 0 4px;">
-                <p style="margin: 0; font-size: 12.5px; line-height: 1.5; color: rgba(255, 255, 255, 0.75); text-shadow: 0 1px 2px rgba(0,0,0,0.5);">
-                    A polished desktop environment inspired by the Mushroom Kingdom. Explore worlds, keep a journal, and configure parameters.
-                </p>
-            </div>
-
-            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; width: 100%; box-sizing: border-box;">
-                <div class="grid-btn" id="welcomeOpenJournal" style="display: flex; align-items: center; gap: 12px; background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.08); padding: 12px; border-radius: 14px; cursor: pointer; transition: background 0.2s, border-color 0.2s;">
-                    <div style="font-size: 20px; width: 24px; text-align: center;">📖</div>
-                    <div style="display: flex; flex-direction: column;">
-                        <span style="font-size: 13px; font-weight: 600; color: #fff;">Open Journal</span>
-                        <span style="font-size: 10px; color: rgba(255, 255, 255, 0.5); margin-top: 2px;">Field notes & logs</span>
-                    </div>
-                </div>
-
-                <div class="grid-btn" id="welcomeOpenThemes" style="display: flex; align-items: center; gap: 12px; background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.08); padding: 12px; border-radius: 14px; cursor: pointer; transition: background 0.2s, border-color 0.2s;">
-                    <div style="font-size: 20px; width: 24px; text-align: center;">🎨</div>
-                    <div style="display: flex; flex-direction: column;">
-                        <span style="font-size: 13px; font-weight: 600; color: #fff;">Themes</span>
-                        <span style="font-size: 10px; color: rgba(255, 255, 255, 0.5); margin-top: 2px;">Visual styles</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="window" id="themeWindow" style="position: absolute; top: calc(50% - 240px); left: calc(50% - 250px); width: 500px; height: 480px; background: rgba(36, 23, 20, 0.75); border: 1px solid rgba(255, 255, 255, 0.12); backdrop-filter: blur(25px); border-radius: 24px; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6); display: none; flex-direction: column; overflow: hidden; color: #fff; transition: transform 0.25s ease, opacity 0.25s ease;">
-        
-        <div class="windowheader" id="themeheader" style="display: flex; align-items: center; padding: 14px 16px; border-bottom: 1px solid rgba(255, 255, 255, 0.08); cursor: grab; background: rgba(0, 0, 0, 0.15); justify-content: space-between;">
-            <div style="display: flex; gap: 8px; align-items: center; width: 60px; z-index: 10;">
-                <div class="control-dot" id="themeClose" title="Close" style="width: 12px; height: 12px; background-color: #ff5f56; border-radius: 50%; cursor: pointer; border: 1px solid rgba(0, 0, 0, 0.12); transition: filter 0.1s;"></div>
-                <div class="control-dot" id="thememinimize" title="Minimize" style="width: 12px; height: 12px; background-color: #ffbd2e; border-radius: 50%; cursor: pointer; border: 1px solid rgba(0, 0, 0, 0.12); transition: filter 0.1s;"></div>
-                <div class="control-dot" id="thememaximize" title="Maximize" style="width: 12px; height: 12px; background-color: #27c93f; border-radius: 50%; cursor: pointer; border: 1px solid rgba(0, 0, 0, 0.12); transition: filter 0.1s;"></div>
-            </div>
-            
-            <div style="display: flex; align-items: center; gap: 6px; position: absolute; left: 50%; transform: translateX(-50%); pointer-events: none;">
-                <span style="font-size: 14px; color: #a4b0be;">⚙️</span>
-                <p class="headertext" style="margin: 0; font-size: 13px; font-weight: 600; color: rgba(255, 255, 255, 0.9); letter-spacing: 0.3px;">Settings</p>
-            </div>
-            <div style="width: 60px;"></div>
-        </div>
-
-        <div style="flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 20px; box-sizing: border-box;">
-            <div>
-                <h2 style="margin: 0; font-size: 20px; font-weight: 700; color: #fff;">Settings</h2>
-                <p style="margin: 4px 0 0 0; font-size: 12px; color: rgba(255, 255, 255, 0.5);">Tune your MariOS to taste.</p>
-            </div>
-
-            <div>
-                <p style="margin: 0 0 10px 0; font-size: 10px; font-weight: bold; color: rgba(255, 255, 255, 0.4); letter-spacing: 1px; text-transform: uppercase;">Accent Color</p>
-                <div style="display: flex; gap: 12px;">
-                    <div class="color-swatch" data-color="#ff3b30" style="width: 28px; height: 28px; border-radius: 50%; background: #ff3b30; cursor: pointer; border: 2px solid transparent; transition: transform 0.2s;"></div>
-                    <div class="color-swatch" data-color="#ffcc00" style="width: 28px; height: 28px; border-radius: 50%; background: #ffcc00; cursor: pointer; border: 2px solid transparent; transition: transform 0.2s;"></div>
-                    <div class="color-swatch" data-color="#34c759" style="width: 28px; height: 28px; border-radius: 50%; background: #34c759; cursor: pointer; border: 2px solid transparent; transition: transform 0.2s;"></div>
-                    <div class="color-swatch" data-color="#007aff" style="width: 28px; height: 28px; border-radius: 50%; background: #007aff; cursor: pointer; border: 2px solid transparent; transition: transform 0.2s;"></div>
-                </div>
-            </div>
-
-            <div>
-                <p style="margin: 0 0 10px 0; font-size: 10px; font-weight: bold; color: rgba(255, 255, 255, 0.4); letter-spacing: 1px; text-transform: uppercase;">Images</p>
-                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
-                    <div class="wallpaper-thumb" onclick="changeBackground('image', 'banner4 - Copy (2).jpg')" style="position: relative; height: 80px; border-radius: 10px; overflow: hidden; cursor: pointer; border: 2px solid rgba(255,255,255,0.1); transition: border-color 0.2s, transform 0.2s;">
-                        <img src="banner4 - Copy (2).jpg" style="width: 100%; height: 100%; object-fit: cover;" />
-                    </div>
-                    <div class="wallpaper-thumb" onclick="changeBackground('image', 'banner1.jpg')" style="position: relative; height: 80px; border-radius: 10px; overflow: hidden; cursor: pointer; border: 2px solid rgba(255,255,255,0.1); transition: border-color 0.2s, transform 0.2s;">
-                        <img src="banner1.jpg" style="width: 100%; height: 100%; object-fit: cover;" />
-                    </div>
-                    <div class="wallpaper-thumb" onclick="changeBackground('image', 'banner2.jpg')" style="position: relative; height: 80px; border-radius: 10px; overflow: hidden; cursor: pointer; border: 2px solid rgba(255,255,255,0.1); transition: border-color 0.2s, transform 0.2s;">
-                        <img src="banner2.jpg" style="width: 100%; height: 100%; object-fit: cover;" />
-                    </div>
-                    <div class="wallpaper-thumb" onclick="changeBackground('image', 'banner3.jpg')" style="position: relative; height: 80px; border-radius: 10px; overflow: hidden; cursor: pointer; border: 2px solid rgba(255,255,255,0.1); transition: border-color 0.2s, transform 0.2s;">
-                        <img src="banner3.jpg" style="width: 100%; height: 100%; object-fit: cover;" />
-                    </div>
-                    <div class="wallpaper-thumb" onclick="changeBackground('image', 'mario.jpg')" style="position: relative; height: 80px; border-radius: 10px; overflow: hidden; cursor: pointer; border: 2px solid rgba(255,255,255,0.1); transition: border-color 0.2s, transform 0.2s;">
-                        <img src="mario.jpg" style="width: 100%; height: 100%; object-fit: cover;" />
-                    </div>
-                    <div class="wallpaper-thumb" onclick="changeBackground('image', 'image_01bdc1.jpg')" style="position: relative; height: 80px; border-radius: 10px; overflow: hidden; cursor: pointer; border: 2px solid rgba(255,255,255,0.1); transition: border-color 0.2s, transform 0.2s;">
-                        <img src="image_01bdc1.jpg" style="width: 100%; height: 100%; object-fit: cover;" />
-                    </div>
-                </div>
-            </div>
-
-            <div>
-                <p style="margin: 0 0 10px 0; font-size: 10px; font-weight: bold; color: rgba(255, 255, 255, 0.4); letter-spacing: 1px; text-transform: uppercase;">Motion</p>
-                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
-                    <div class="wallpaper-thumb" onclick="changeBackground('video', 'waterfall.mp4')" style="position: relative; height: 95px; border-radius: 12px; overflow: hidden; cursor: pointer; border: 2px solid rgba(255,255,255,0.1); transition: border-color 0.2s, transform 0.2s;">
-                        <img src="banner4 - Copy (2).jpg" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.65);" />
-                        <span style="position: absolute; bottom: 8px; right: 8px; font-size: 9px; font-weight: bold; background: rgba(0,0,0,0.6); padding: 3px 6px; border-radius: 4px; display: flex; align-items: center; gap: 4px;">📹 VIDEO</span>
-                    </div>
-                    <div class="wallpaper-thumb" onclick="changeBackground('video', 'mario_room.mp4')" style="position: relative; height: 95px; border-radius: 12px; overflow: hidden; cursor: pointer; border: 2px solid rgba(255,255,255,0.1); transition: border-color 0.2s, transform 0.2s;">
-                        <img src="banner3.jpg" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.65);" />
-                        <span style="position: absolute; bottom: 8px; right: 8px; font-size: 9px; font-weight: bold; background: rgba(0,0,0,0.6); padding: 3px 6px; border-radius: 4px; display: flex; align-items: center; gap: 4px;">📹 VIDEO</span>
-                    </div>
-                </div>
-            </div>
-
-            <div>
-                <p style="margin: 0 0 10px 0; font-size: 10px; font-weight: bold; color: rgba(255, 255, 255, 0.4); letter-spacing: 1px; text-transform: uppercase;">Gradients</p>
-                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
-                    <div class="wallpaper-thumb gradient-preset" style="height: 60px; border-radius: 12px; cursor: pointer; background: linear-gradient(135deg, #4158D0, #C850C0, #FFCC70); border: 2px solid rgba(255,255,255,0.1);"></div>
-                    <div class="wallpaper-thumb gradient-preset" style="height: 60px; border-radius: 12px; cursor: pointer; background: linear-gradient(135deg, #090979, #020024, #00d4ff); border: 2px solid rgba(255,255,255,0.1);"></div>
-                </div>
-            </div>
-
-            <div>
-                <p style="margin: 0 0 10px 0; font-size: 10px; font-weight: bold; color: rgba(255, 255, 255, 0.4); letter-spacing: 1px; text-transform: uppercase;">Custom Wallpaper</p>
-                <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 8px;">
-                    <button id="uploadWallpaperFile" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; color: #fff; padding: 8px 12px; font-size: 12px; font-weight: 500; cursor: pointer; transition: background 0.2s;">Upload file</button>
-                    <input type="file" id="hiddenFileInput" style="display: none;" accept="image/*,video/*" />
-                    <input type="text" id="wallpaperUrlInput" placeholder="https://.../image.jpg or video.mp4" style="flex: 1; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: #fff; padding: 8px 12px; font-size: 12px; outline: none;" />
-                    <button id="applyUrlWallpaper" style="background: #e03131; border: none; border-radius: 8px; color: #fff; padding: 8px 14px; font-size: 12px; font-weight: 600; cursor: pointer; transition: opacity 0.2s;">Apply URL</button>
-                </div>
-            </div>
-
-            <div style="background: rgba(0,0,0,0.2); border-radius: 14px; padding: 14px; border: 1px solid rgba(255,255,255,0.06);">
-                <p style="margin: 0; font-size: 12px; font-weight: 600; color: #fff;">MariOS 2.0 (Mushroom Kingdom)</p>
-                <p style="margin: 4px 0 0 0; font-size: 10px; color: rgba(255, 255, 255, 0.45);">Build 07.16.2026 • Made with love for pipes, plumbers, and pixels.</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="window" id="journalApp" style="position: absolute; top: 200px; left: 500px; display: none; background: rgba(30, 30, 30, 0.65); border: 1px solid rgba(255,255,255,0.15); backdrop-filter: blur(25px); border-radius: 24px; box-shadow: 0 20px 45px rgba(0,0,0,0.5); flex-direction: column; overflow: hidden; color: #fff;">
-        <div class="windowheader" id="journalAppheader" style="display: flex; align-items: center; padding: 14px 16px; border-bottom: 1px solid rgba(255, 255, 255, 0.08); cursor: grab; background: rgba(0, 0, 0, 0.15); justify-content: space-between;">
-            <div style="display: flex; gap: 8px; align-items: center; width: 60px;">
-                <div class="control-dot" id="journalClose" title="Close" style="width: 12px; height: 12px; background-color: #ff5f56; border-radius: 50%; cursor: pointer; border: 1px solid rgba(0, 0, 0, 0.12);"></div>
-            </div>
-            <p class="headertext" style="margin: 0; font-size: 13px; font-weight: 600; color: rgba(255, 255, 255, 0.9);">MariOS Journal</p>
-            <div style="width: 60px;"></div>
-        </div>
-
-        <div style="background-color: #fff; margin: 12px; border-radius: 16px; width: 550px; height: 380px; padding: 12px; display: flex; gap: 12px; box-sizing: border-box;">
-            <div id="journalSidebar" style="background-color: #f5f5f5; width: 160px; border-radius: 10px; padding: 8px; display: flex; flex-direction: column; gap: 8px; overflow-y: auto; box-sizing: border-box; color: #333;"></div>
-            <div id="journalContentArea" style="flex: 1; overflow-y: auto; padding: 8px; font-family: 'Courier New', Courier, monospace; color: #000; box-sizing: border-box;">
-                <p>Select a journal log from the sidebar!</p>
-            </div>
-        </div>
-    </div>
+    </nav>
 
     <script src="script.js"></script>
 </body>
+</html>
 </html>
